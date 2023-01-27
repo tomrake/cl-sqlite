@@ -30,19 +30,23 @@
            :sqlite3-bind-blob
            :destructor-transient
            :destructor-static
-           :sqlite3-last-insert-rowid))
+           :sqlite3-last-insert-rowid)
+  :import-from :sqlite/config #:sqlite3-lib)
 
 (in-package :sqlite-ffi)
 
-(define-foreign-library sqlite3-lib
-  (:darwin (:default "libsqlite3"))
-  (:unix (:or "libsqlite3.so.0" "libsqlite3.so"))
-  (t (:or (:default "libsqlite3") (:default "sqlite3"))))
+(unless *sqlite3-lib-override* 
+  (define-foreign-library sqlite3-lib
+      (:darwin (:default "libsqlite3"))
+    (:unix (:or "libsqlite3.so.0" "libsqlite3.so"))
+    (t (:or (:default "libsqlite3") (:default "sqlite3")))))
 
-(use-foreign-library sqlite3-lib)
+(unless (member :sqlite-foreign-libs-already-loaded
+		*features*)
+  (use-foreign-library sqlite3-lib))
 
 (defcenum error-code
-  (:OK 0)
+    (:OK 0)
   (:ERROR 1)
   (:INTERNAL 2)
   (:PERM 3)

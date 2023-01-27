@@ -13,9 +13,17 @@
                (:file "cache")
                (:file "sqlite" :depends-on ("sqlite-ffi" "cache")))
 
-  :depends-on (:iterate :cffi)
+  :depends-on (:iterate :cffi :sqlite/config)
 
   :in-order-to ((test-op (load-op sqlite-tests))))
 
+(defsystem :sqlite/config
+  :name "sqlite/config")
+  :author "Tom Rake <zzzap1957@gmail.com>"
+  :description "A external library configuration based on the cl+ssh config idiom."
+  :version "0.0.1"
+  :license "Public Domain"
+  :components ((:file config))
+  :depends-on (:cffi)
 (defmethod perform ((o asdf:test-op) (c (eql (find-system :sqlite))))
   (funcall (intern "RUN-ALL-SQLITE-TESTS" :sqlite-tests)))
