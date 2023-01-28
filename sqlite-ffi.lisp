@@ -1,4 +1,4 @@
-(defpackage :sqlite-ffi
+(defpackage #:sqlite-ffi
   (:use :cl :cffi)
   (:export :error-code
            :p-sqlite3
@@ -31,11 +31,11 @@
            :destructor-transient
            :destructor-static
            :sqlite3-last-insert-rowid)
-  :import-from :sqlite/config #:sqlite3-lib)
+  (:import-from :sqlite/config sqlite3-lib))
 
 (in-package :sqlite-ffi)
 
-(unless *sqlite3-lib-override* 
+(unless sqlite/config::*sqlite-lib-override* 
   (define-foreign-library sqlite3-lib
       (:darwin (:default "libsqlite3"))
     (:unix (:or "libsqlite3.so.0" "libsqlite3.so"))
