@@ -11,9 +11,9 @@
     "Define the path  where sqlite-lib resides to PATH (not evaluated). This
 macro should be used before loading SQLITE.
 
-For instance, this defines lib-sqlite as \"c:/msys64/mingw64/bin/libsqlite3-0.dll\":
+For instance, this defines lib-sqlite as \"c:/msys64/ucrt64/bin/libsqlite3-0.dll\":
    (ql:quicklload :sqlite/config)
-   (sqlite/config:define-sqlite-lib \"c:/msys64/mingw64/bin/libsqlite3-0.dll\")
+   (sqlite/config:define-sqlite-lib \"c:/msys64/ucrt64/bin/libsqlite3-0.dll\")
    (ql:quickload :sqlite)"
   
   `(progn
