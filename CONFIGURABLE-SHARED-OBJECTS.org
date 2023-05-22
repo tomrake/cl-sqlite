@@ -1,0 +1,14 @@
+#+TITLE: Configurable Shared Objecs - .dll, .so files
+
+* External Libaries the right way.
+
+I modified the external library code i cl-sqlite to allow the user to customize the location of the external library.
+First I created the config system to include a macro to override the default seach behaviour.
+Next I modified sqlite-ffi to override the complexities of its prexisting define-foreign-library and in the override case use the config define-foreign-library location.
+I added config to asd and made the primary system depend on the config.
+
+The model I used in that of CL+SSL.
+
+
+
+
